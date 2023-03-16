@@ -28,3 +28,6 @@ alias gl="git log --oneline --all --graph --decorate  $*"
 alias gs="git status"
 alias clone="~/dream/dreamGIT_clone"
 alias push="~/dream/dreamGIT_push"
+# DEV
+alias python=python3
+alias py=python3
