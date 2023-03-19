@@ -1,5 +1,5 @@
-# Dream Setup
-### Setup dos sonhos para os shells *zsh* e *bash* no Ubuntu on WSL2 
+# Dream Setup Linux
+### Setup Linux dos sonhos para os shells *zsh* e *bash* no Ubuntu on WSL2 no Windows 10 
 
 <div style="display: inline_block">
   <img align="right" alt="Dev-pic" style="border-radius: 50%; width: 50%; height:auto;" src="https://github.com/dev-carvalho/dream/blob/main/k-1.png">
