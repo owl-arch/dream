@@ -99,7 +99,7 @@ else
   #git clone https://github.com/supercrabtree/k .oh-my-zsh/custom/plugins/k  >/dev/null 2>&1
   # Fiz alterações para ficar mais bacana
   #git clone https://github.com/dev-carvalho/k .oh-my-zsh/custom/plugins/k >/dev/null 2>&1
-  cp -r dream/k.zsh-plugin .oh-my-zsh/custom/plugins/k >/dev/null 2>&1
+  cp -r dream/plugin-k .oh-my-zsh/custom/plugins/k >/dev/null 2>&1
 
   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/history
   echo "instalando plugin 'history'"
