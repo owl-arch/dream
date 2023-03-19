@@ -5,24 +5,24 @@
 cd ~ || exit
 
 #-- Header
-echo "Ubuntu on WSL - Versao 1.0" 
+echo "Ubuntu on WSL - Versao 1.0"
 echo "2023 by Marcos Antonio de Carvalho"
 echo "----------------------------------"
-start=`date +%s`
+start=$(date +%s)
 figlet WSL | lolcat
 
 #  *************
-#    FUNCTIONS    
+#    FUNCTIONS
 #  *************
 
 # Instalação/Remoção Docker Containers
 # Funções implementadas:
 # package_remove() e package_install()
 # docker_remove() e docker_install()
-. ~/dream/dreamFUNCTIONS
+. ~/dream/k-FUNCTIONS
 
 #  **********
-#    DOCKER  
+#    DOCKER
 #  **********
 
 docker_install
@@ -31,7 +31,6 @@ docker_install
 # inicializa o serviço docker
 service docker start >/dev/null 2>&1
 
-
 # Volumes
 mkdir -p ~/volume/postgres
 mkdir -p ~/volume/pgadmin
@@ -39,18 +38,14 @@ mkdir -p ~/volume/mysql
 mkdir -p ~/volume/mediawiki/database
 mkdir -p ~/volume/mediawiki/html/images
 
-
-
-
 #  *************************************************************
-#    WSL - Configuração de comandos para proxima inicialização  
+#    WSL - Configuração de comandos para proxima inicialização
 #  *************************************************************
 
 # Configuração de comandos para proxima inicialização do WSL
 # https://learn.microsoft.com/pt-br/windows/wsl/wsl-config
 
-
-cat << EOF > /mnt/c/Users/karvalho/teste.wslconfig
+cat <<EOF >/mnt/c/Users/karvalho/teste.wslconfig
 # Settings apply across all Linux distros running on WSL 2
 [wsl2]
 
@@ -63,8 +58,7 @@ processors=2
 EOF
 echo "Created /mnt/c/Users/<UserName>/.wslconfig"
 
-
-cat << EOF > /etc/wsl.conf
+cat <<EOF >/etc/wsl.conf
 #
 # Configuração criada pelo setWSL
 #
@@ -76,16 +70,14 @@ command = "service docker start"
 EOF
 echo "Created /etc/wsl.conf"
 
-
 #
 # É necessário o comando 'wsl --shutdown' para recarregar o arquivo wsl.conf
 #
 
-
-#-- Runtime 
+#-- Runtime
 echo
-end=`date +%s`
+end=$(date +%s)
 date
-runtime=$((end-start))
+runtime=$((end - start))
 echo "Runtime $runtime seconds"
 echo ""

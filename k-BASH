@@ -2,34 +2,38 @@
 # Autor: Marcos Antonio de Carvalho
 # Descrição: Instalação do Oh-my-bash para embelezamento
 
+#
+# teste e reintalação
+# rm .bashrc; rm -r .oh-my-bash; dream/k-BASH
+#
+
+# muda para o diretório de trabalho
 cd ~ || exit
 
 #-- Header
-echo "Bash on Ubuntu on WSL - Versao 1.0" 
+echo "Bash on Ubuntu on WSL - Versao 1.0"
 echo "2023 by Marcos Antonio de Carvalho"
 echo "----------------------------------"
-start=`date +%s`
+start=$(date +%s)
 figlet Bash | lolcat
 
 #  *************
-#    FUNCTIONS    
+#    FUNCTIONS
 #  *************
 
 # Instalação/Remoção Docker Containers
 # Funções implementadas:
 # package_remove() e package_install()
 # docker_remove() e docker_install()
-. ~/dream/dreamFUNCTIONS
-
+. ~/dream/k-FUNCTIONS
 
 #  ********
-#    Bash 
+#    Bash
 #  ********
 
 #
 #
 #
-
 
 #  *************
 #    OH-MY-ZSH
@@ -39,9 +43,9 @@ figlet Bash | lolcat
 if [ -d ~/.oh-my-bash ]; then
   echo "install oh-my-bash .. ok (instaled)"
 else
-  echo "install oh-my-bash .. Installing" 
-  git clone https://github.com/ohmybash/oh-my-bash.git  ~/.oh-my-bash >/dev/null 2>&1 
-  cp ~/.oh-my-bash/templates/bashrc.osh-template        ~/.bashrc   
+  echo "install oh-my-bash .. Installing"
+  git clone https://github.com/ohmybash/oh-my-bash.git ~/.oh-my-bash >/dev/null 2>&1
+  cp ~/.oh-my-bash/templates/bashrc.osh-template ~/.bashrc
 
   # Configuração de comandos
   data=$(date)
@@ -51,16 +55,16 @@ else
   #    $data 
   #  *******************************
 
-  if [ -f ~/dream/dreamCOMMAND ]; then
-    . ~/dream/dreamCOMMAND
+  if [ -f ~/dream/k-COMMAND ]; then
+    . ~/dream/k-COMMAND
   fi
-  " >> ~/.bashrc
+  " >>~/.bashrc
 fi
 
-#-- Runtime 
+#-- Runtime
 echo
-end=`date +%s`
+end=$(date +%s)
 date
-runtime=$((end-start))
+runtime=$((end - start))
 echo "Runtime $runtime seconds"
 echo ""

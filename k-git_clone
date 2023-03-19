@@ -3,7 +3,7 @@
 
 cd ~/github || exit
 
-start=`date +%s`
+start=$(date +%s)
 
 git branch -M main
 git remote add $1 https://github.com/dev-carvalho/$1.git
@@ -13,10 +13,11 @@ echo
 
 git clone https://github.com/dev-carvalho/$1.git
 
-#-- Runtime 
+#-- Runtime
 echo
-end=`date +%s`
+end=$(date +%s)
 date
-runtime=$((end-start))
+runtime=$((end - start))
 echo "Runtime $runtime seconds"
 echo ""
+cd -
