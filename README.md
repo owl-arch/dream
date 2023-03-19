@@ -2,9 +2,9 @@
 ### Setup dos sonhos para os shells *zsh* e *bash* no Ubuntu on WSL2 
 
 <div style="display: inline_block">
-  <img align="right" alt="Dev-pic" style="border-radius: 50%; width: 50%; height:auto;" src="https://github.com/dev-carvalho/dream/blob/main/dream-1.png">
-  <img align="right" alt="Dev-pic" style="border-radius: 50%; width: 50%; height:auto;" src="https://github.com/dev-carvalho/dream/blob/main/dream-2.png">
-  <img align="right" alt="Dev-pic" style="border-radius: 50%; width: 50%; height:auto;" src="https://github.com/dev-carvalho/dream/blob/main/dream-3.png">
+  <img align="right" alt="Dev-pic" style="border-radius: 50%; width: 50%; height:auto;" src="https://github.com/dev-carvalho/dream/blob/main/k-1.png">
+  <img align="right" alt="Dev-pic" style="border-radius: 50%; width: 50%; height:auto;" src="https://github.com/dev-carvalho/dream/blob/main/k-2.png">
+  <img align="right" alt="Dev-pic" style="border-radius: 50%; width: 50%; height:auto;" src="https://github.com/dev-carvalho/dream/blob/main/k-3.png">
 </div>
 
 <br>
