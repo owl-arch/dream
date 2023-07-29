@@ -12,7 +12,7 @@ git add .
 git commit -m "Update by $node in $now"
 
 git branch -M main
-git remote add $1 git@github.com:dev-carvalho/$1.git
+git remote add $1 git@github.com:owl-arch/$1.git
 
 figlet $1 | lolcat
 echo
