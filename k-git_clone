@@ -1,28 +1,32 @@
 # Autor: Marcos Antonio de Carvalho
 # Descrição: (Download) faz um clone do projeto do Github na maquina local
 
-echo '.. Diretótio root/github'
+echo 'step 1 :: root/github'
 
 cd ~/github || exit
 
 start=$(date +%s)
 
-echo '.. branch'
+echo 'step 2 :: branch'
 git branch -M main
 
-echo '.. Remove remote'
-
-# git remote add $1 https://github.com/owl-arch/$1.git
+echo 'step 3 :: Add  remote'
+git remote add $1 git@github.com:owl-arch/$1.git
 # Na segunda vez: "error: remote yf already exists.''
 
 # Apenas atualizar a 'origin' ou '$1'
-git remote set-url $1 https://github.com/owl-arch/$1.git
+# git remote set-url $1 git@github.com:owl-arch/$1.git
 
 figlet $1 | lolcat
 
-echo 
 
+echo "step 4 :: clone '$1.git'"
+echo
 git clone git@github.com:owl-arch/dream.git
+
+echo
+echo "step 5 :: Remove 'remote' (cleanning)"
+git remote remove $1
 
 # Esse passou a pedir 
 # git clone https://github.com/owl-arch/$1.git
@@ -35,3 +39,7 @@ runtime=$((end - start))
 echo "Runtime $runtime seconds"
 echo ""
 cd -
+
+echo
+echo 'OK!'
+echo
