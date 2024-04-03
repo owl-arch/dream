@@ -26,6 +26,10 @@ echo
 echo "step 5 :: push '$1.git'"
 git push -uf $1 main
 
+echo
+echo "step 6 :: remove remote '$1.git' (cleanning)"
+git remote remove $1
+
 cd -
 
 #-- Runtime 
