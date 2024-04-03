@@ -10,7 +10,7 @@ start=$(date +%s)
 echo 'step 2 :: branch'
 git branch -M main
 
-echo 'step 3 :: Add  remote'
+echo "step 3 :: Add remote '$1.git'"
 git remote add $1 git@github.com:owl-arch/$1.git
 # Na segunda vez: "error: remote yf already exists.''
 
@@ -25,7 +25,7 @@ echo
 git clone git@github.com:owl-arch/dream.git
 
 echo
-echo "step 5 :: Remove 'remote' (cleanning)"
+echo "step 5 :: remove remote '$1.git' (cleanning)"
 git remote remove $1
 
 # Esse passou a pedir 

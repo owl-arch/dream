@@ -8,15 +8,22 @@ start=`date +%s`
 node=$(uname -n)
 now=$(date +'%A, %d de %B de %Y at %H:%M')
 
+echo "step 1 :: add"
 git add .
+
+echo "step 2 :: commit"
 git commit -m "Update by $node in $now"
 
+echo "step 3 :: branch"
 git branch -M main
+
+echo "step 4 :: add '$1.git'"
 git remote add $1 git@github.com:owl-arch/$1.git
 
 figlet $1 | lolcat
-echo
 
+echo
+echo "step 5 :: push '$1.git'"
 git push -uf $1 main
 
 cd -
@@ -28,3 +35,7 @@ date
 runtime=$((end-start))
 echo "Runtime $runtime seconds"
 echo ""
+
+echo
+echo 'OK!'
+echo
