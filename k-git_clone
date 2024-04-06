@@ -1,9 +1,9 @@
 # Autor: Marcos Antonio de Carvalho
 # Descrição: (Download) faz um clone do projeto do Github na maquina local
 
-echo 'step 1 :: root/github'
+cd ~/github || { echo "Fail :: '~/github' does not exist."; exit; }
 
-cd ~/github || exit
+[ -d $1 ] && { echo "step 1 :: root/github :: Removing $1..."; rm -r $1; } || echo 'step 1 :: root/github'
 
 start=$(date +%s)
 
