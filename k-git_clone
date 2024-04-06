@@ -22,7 +22,7 @@ figlet $1 | lolcat
 
 echo "step 4 :: clone '$1.git'"
 echo
-git clone git@github.com:owl-arch/dream.git
+git clone git@github.com:owl-arch/$1.git
 
 echo
 echo "step 5 :: remove remote '$1.git' (cleanning)"

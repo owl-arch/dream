@@ -11,6 +11,7 @@ chmod 744 k-WSL
 
 chmod 744 k-git_clone
 chmod 744 k-git_push
+chmod 744 k-git_deploy
 
 ./k-UTILS
 ./k-WSL

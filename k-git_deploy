@@ -1,0 +1,17 @@
+# Autor: Marcos Antonio de Carvalho
+# Descrição:
+
+cd ~/github || { echo "Fail :: '~/github' does not exist."; exit; }
+
+[ -d ~/$1 ] && { echo "Removing ~/$1..."; rm -r $1; }
+
+ls -la
+
+[ -d ~/github/$1 ] && { echo "copy to ~/$1..."; cp -r ~/github/$1 ~/$1; } 
+
+echo ""
+cd -
+
+echo
+echo 'OK!'
+echo
