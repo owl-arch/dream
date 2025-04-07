@@ -55,8 +55,8 @@ else
   #    $data 
   #  *******************************
 
-  if [ -f ~/dream/k-COMMAND ]; then
-    . ~/dream/k-COMMAND
+  if [ -f ~/dream/commands_setup.sh ]; then
+    . ~/dream/commands_setup.sh
   fi
   " >>~/.bashrc
 fi

@@ -26,8 +26,9 @@ alias d="figlet Docker | lolcat; docker"
 # Beautiful git log graph shortcut (shown in the top image)
 alias gl="git log --oneline --all --graph --decorate  $*"
 alias gs="git status"
-alias clone="~/dream/k-git_clone"
-alias push="~/dream/k-git_push"
+# alias clone="~/dream/k-git_clone"
+alias clone="~/dream/clone.sh"
+alias push="~/dream/push.sh"
 # DEV
 alias python=python3
 alias py=python3
