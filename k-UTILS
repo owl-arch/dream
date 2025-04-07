@@ -1,0 +1,67 @@
+#!/bin/bash
+# Autor: Marcos Antonio de Carvalho
+# Descrição: Instalação de Utililitários
+
+cd ~ || exit
+
+#-- Header
+echo "UTILS - Ubuntu on WSL - Versao 1.0"
+echo "2023 by Marcos Antonio de Carvalho"
+echo "----------------------------------"
+start=$(date +%s)
+figlet UTILS | lolcat
+
+#  *************
+#    FUNCTIONS
+#  *************
+
+# Instalação/Remoção Docker Containers
+# Funções implementadas:
+# package_remove() e package_install()
+# docker_remove() e docker_install()
+. ~/dream/k-FUNCTIONS
+
+#  ***********************
+#    UTILS - Utilitários
+#  ***********************
+
+echo "Updating package list"
+apt update >/dev/null 2>&1 # Atualiza a lista de PACKAGES
+
+#-- Check a existencia do 'Aptitude'
+if (dpkg --get-selections | grep aptitude >/dev/null 2>&1); then
+  echo "install aptitude .. ok (instaled)"
+else
+  echo "install aptitude .. Installing"
+  apt-get install -y aptitude >/dev/null 2>&1
+fi
+
+#
+# REMOVE
+#
+for comando in rsyslog toilet; do
+  package_remove $comando
+done
+
+#
+# INSTALL
+#
+for comando in neofetch lolcat iputils-ping net-tools htop hdparm bashtop exa pydf multitail mtr tree curl figlet; do
+  package_install $comando
+done
+
+# medidor de velocidade de acesso do storage device
+# Modo de usar: hdparm -f -T -t /dev/sda
+
+# Multiplos arquivos no mesmo tail
+# Modo de usar: multitail -s 2 -ci green -i /var/log/dpkg.log -ci red /var/log/dpkg.log -ci yellow /var/log/dpkg.log
+
+# Sofisticado trace route
+# Modo de usar: mtr -r -c 5 google.com
+
+#-- Runtime
+end=$(date +%s)
+date
+runtime=$((end - start))
+echo "Runtime $runtime seconds"
+echo ""

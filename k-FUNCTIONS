@@ -1,0 +1,73 @@
+
+#  ***********
+#    PACKAGE    
+#  ***********
+
+# Instalação/Remoção Package
+# Funções implementadas: package_remove e package_install
+
+#-- Esta funcao REMOVE um pacote via Aptitude
+package_remove (){
+  #if ( dpkg --get-selections  | grep "$1 " >/dev/null 2>&1 ) 
+  if ( dpkg --get-selections  | grep "^$1" | grep -v "deinstall" >/dev/null 2>&1 ) 
+  then
+    echo "remove  $1 .. Removing"   
+    #apt-get --purge autoremove -y $2 ;#>/dev/null 2>&1 
+    aptitude -y purge $1 >/dev/null 2>&1 
+  else  
+    echo "remove  $1.. ok (not instaled)"
+  fi
+}
+
+
+
+#-- Esta funcao INSTALA um pacote via Aptitude
+package_install (){
+  if ( dpkg --get-selections  | grep "^$1" | grep -v "deinstall" >/dev/null 2>&1 ) 
+  then
+    echo "install $1 .. ok (instaled)"
+  else  
+    echo "install $1 .. Installing"   
+    aptitude -y install $1 >/dev/null 2>&1 
+  fi
+}
+
+
+#  **********
+#    DOCKER  
+#  **********
+
+# Instalação/Remoção Docker Containers
+# Funções implementadas: docker_remove e docker_install
+
+# Remoção do DOCKER
+docker_remove (){
+  if ( dpkg --get-selections  | grep "^docker" | grep -v "deinstall" >/dev/null 2>&1 )
+  then
+    echo  "remove docker .. Removing"   
+    #apt-get --purge autoremove -y docker-ce ;#>/dev/null 2>&1 
+    aptitude -y purge docker-ce >/dev/null 2>&1 
+  else  
+    echo  "remove docker .. ok (not instaled)"
+  fi
+}
+
+# Instalação do DOCKER
+docker_install (){
+  #-- Check a existencia do 'docker'
+  if ( dpkg --get-selections  | grep "^docker" | grep -v "deinstall" | grep -v "purge" >/dev/null 2>&1 ) 
+  then
+    echo  "install docker .. ok (instaled)"
+  else 
+    echo "Docker:"
+    #
+    echo ".. Adding gpg-key"
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -       >/dev/null 2>&1
+    echo ".. Adding repository" 
+    add-apt-repository -y \
+      "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable" >/dev/null 2>&1 
+    echo ".. install docker .. Installing"
+    aptitude -y install docker-ce >/dev/null 2>&1    
+  fi
+}
+

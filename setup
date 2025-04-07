@@ -1,0 +1,29 @@
+#!/bin/bash
+# Autor: Marcos Antonio de Carvalho
+# Descrição: Instalação e ajustes no Ubuntu on WSL (Windows 10)
+
+cd ~/dream || exit
+
+chmod 744 k-BASH
+chmod 744 k-ZSH
+chmod 744 k-UTILS
+chmod 744 k-WSL
+
+chmod 744 k-git_clone
+chmod 744 k-git_push
+
+./k-UTILS
+./k-WSL
+
+# teste e reintalação
+rm .bashrc
+rm -r .oh-my-bash
+./k-BASH
+
+# teste e reintalação
+# rm .zshrc; rm -r .oh-my-zsh
+./k-ZSH
+
+cd -
+
+
