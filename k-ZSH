@@ -1,0 +1,135 @@
+#!/bin/bash
+# Autor: Marcos Antonio de Carvalho
+# Descrição: Instalação do ZSH como shell padrão e Oh-my-zsh para embelezamento
+
+#
+# teste e reintalação
+# rm .zshrc; rm -r .oh-my-zsh; dream/k-ZSH
+#
+
+# muda para o diretório de trabalho
+cd ~ || exit
+
+#-- Header
+echo "ZSH on Ubuntu on WSL - Versao 1.0"
+echo "2023 by Marcos Antonio de Carvalho"
+echo "----------------------------------"
+start=$(date +%s)
+figlet zShell | lolcat
+
+#  *************
+#    FUNCTIONS
+#  *************
+
+# Instalação/Remoção Docker Containers
+# Funções implementadas:
+# package_remove() e package_install()
+# docker_remove() e docker_install()
+. ~/dream/k-FUNCTIONS
+
+#  ***********
+#    Z Shell
+#  ***********
+
+echo -n "Adding repository"
+if command -v zsh >/dev/null 2>&1; then
+  echo " .. ok (instaled)"
+else
+  for comando in "add-apt-repository ppa:git-core/ppa -y" "apt-get update -q" "apt-get upgrade -yq"; do
+    if ! $comando >/dev/null 2>&1; then
+      echo -n " .. FAIL"
+      exit 1
+    fi
+  done
+  echo " .. Installing"
+fi
+
+for pacote in git zsh; do
+  package_install $pacote
+done
+
+# Verifica se existe o zsh no sistema...
+if command -v zsh >/dev/null 2>&1; then
+  # Se sim, altera a shell padrão do usuário para o ZSH
+  sudo chsh -s "$(command -v zsh)" "$USER"
+else
+  # Senão, exibe mensagem de erro e sai
+  echo "Não foi encontrado o executável do ZSH no sistema, saindo com erro..."
+  exit 1
+fi
+
+#  *************
+#    OH-MY-ZSH
+#  *************
+
+#-- Check a existencia do '~/.oh-my-bash'
+if [ -d ~/.oh-my-zsh ]; then
+  echo "install oh-my-zsh .. ok (instaled)"
+else
+  echo "install oh-my-zsh .. Installing"
+  git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh >/dev/null 2>&1
+  cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+
+  #  THEMES
+  if cat .zshrc | grep '^ZSH_THEME="robbyrussell"' >/dev/null 2>&1; then
+    # Define novo thema
+    sed -i "s|robbyrussell|k|g" .zshrc
+    cp dream/k.zsh-theme .oh-my-zsh/custom/themes
+  fi
+
+  #  PLUGINS
+  if cat .zshrc | grep '^plugins=(git)' >/dev/null 2>&1; then
+    # Define os plugins
+    # https://blog.betrybe.com/ferramentas/oh-my-zsh/
+    sed -i "s|plugins=(git)|plugins=(git zsh-syntax-highlighting zsh-autosuggestions k history jsontools)|g" .zshrc
+  fi
+
+  #-- Instalação de plugins
+
+  # Zsh-syntax-highlighting
+  echo "instalando plugin 'zsh-syntax-highlighting'"
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git .oh-my-zsh/custom/plugins/zsh-syntax-highlighting >/dev/null 2>&1
+
+  # zsh-autosuggestions
+  echo "instalando plugin 'zsh-autosuggestions'"
+  git clone https://github.com/zsh-users/zsh-autosuggestions .oh-my-zsh/custom/plugins/zsh-autosuggestions >/dev/null 2>&1
+
+  # K
+  echo "instalando plugin 'k'"
+  #git clone https://github.com/supercrabtree/k .oh-my-zsh/custom/plugins/k  >/dev/null 2>&1
+  # Fiz alterações para ficar mais bacana
+  #git clone https://github.com/dev-carvalho/k .oh-my-zsh/custom/plugins/k >/dev/null 2>&1
+  cp -r dream/k.zsh-plugin .oh-my-zsh/custom/plugins/k >/dev/null 2>&1
+
+  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/history
+  echo "instalando plugin 'history'"
+  git clone https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/history .oh-my-zsh/custom/plugins/history >/dev/null 2>&1
+
+  # jsontools
+  # exemplo de uso:
+  #   curl https://coderwall.com/bobwilliams.json | pp_json
+  #   is_json < data.json (retorna true)
+  echo "instalando plugin 'jsontools'"
+  git clone https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/jsontools .oh-my-zsh/custom/plugins/jsontools >/dev/null 2>&1
+
+  # Configuração de comandos
+  data=$(date)
+  echo "
+  #  *******************************
+  #    Carrega o setup de comandos 
+  #    $data 
+  #  *******************************
+
+  if [ -f ~/dream/commands_setup.sh ]; then
+    . ~/dream/commands_setup.sh 
+  fi
+  " >>~/.zshrc
+fi
+
+#-- Runtime
+echo
+end=$(date +%s)
+date
+runtime=$((end - start))
+echo "Runtime $runtime seconds"
+echo ""

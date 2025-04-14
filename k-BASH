@@ -1,0 +1,70 @@
+#!/bin/bash
+# Autor: Marcos Antonio de Carvalho
+# Descrição: Instalação do Oh-my-bash para embelezamento
+
+#
+# teste e reintalação
+# rm .bashrc; rm -r .oh-my-bash; dream/k-BASH
+#
+
+# muda para o diretório de trabalho
+cd ~ || exit
+
+#-- Header
+echo "Bash on Ubuntu on WSL - Versao 1.0"
+echo "2023 by Marcos Antonio de Carvalho"
+echo "----------------------------------"
+start=$(date +%s)
+figlet Bash | lolcat
+
+#  *************
+#    FUNCTIONS
+#  *************
+
+# Instalação/Remoção Docker Containers
+# Funções implementadas:
+# package_remove() e package_install()
+# docker_remove() e docker_install()
+. ~/dream/k-FUNCTIONS
+
+#  ********
+#    Bash
+#  ********
+
+#
+#
+#
+
+#  *************
+#    OH-MY-ZSH
+#  *************
+
+#-- Check a existencia do '~/.oh-my-bash'
+if [ -d ~/.oh-my-bash ]; then
+  echo "install oh-my-bash .. ok (instaled)"
+else
+  echo "install oh-my-bash .. Installing"
+  git clone https://github.com/ohmybash/oh-my-bash.git ~/.oh-my-bash >/dev/null 2>&1
+  cp ~/.oh-my-bash/templates/bashrc.osh-template ~/.bashrc
+
+  # Configuração de comandos
+  data=$(date)
+  echo "
+  #  *******************************
+  #    Carrega o setup de comandos 
+  #    $data 
+  #  *******************************
+
+  if [ -f ~/dream/commands_setup.sh ]; then
+    . ~/dream/commands_setup.sh
+  fi
+  " >>~/.bashrc
+fi
+
+#-- Runtime
+echo
+end=$(date +%s)
+date
+runtime=$((end - start))
+echo "Runtime $runtime seconds"
+echo ""
